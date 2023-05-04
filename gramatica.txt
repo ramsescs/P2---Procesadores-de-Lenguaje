@@ -1,0 +1,63 @@
+S ::= <sentencias>
+
+<sentencias> ::= <sentencia> <comentario> <fin_parrafo> <sentencias> | lambda
+
+<sentencia> ::= <asignacion> | <def_funcion> | <uso_funcion> | <condicional> | <bucle> | <declaracion> | <comentario> | lambda
+
+<comentario> ::= '%' TEXTO | lambda
+
+<declaracion> ::= <tipo> ID '=' <expresion> | <tipo> <varios_id> | <declaracion_reg> | <declaracion_vec>
+
+<varios_id> ::= ID ',' <nombres> | ID
+
+<tipo> ::= entero | real | booleano | caracter
+
+<declaracion_reg> ::= REGISTRO ID '{' <blq_registro> '}'
+
+<blq_registro> ::= <declaracion> ';' <blq_registro> | <declaracion> ';'
+
+<declaracion_vec> ::= VECTOR '<' <tipo> '>' ID '[' EXPRESION ']'
+
+<asignacion> ::= ID '=' <expresion> | ID '.' ID '=' <expresion> | ID '[' <expresion> ']' = <expresion>
+
+<def_funcion> ::= FUNCION ID '(' <lista_args> ')' ':' <tipo> '{' <sentencias_func> '}'
+
+<sentencias_func> ::= <sentencias> DEVOLVER ID
+
+<lista_args> ::= <tipo> ID ',' <lista_args> | <tipo> ID | lambda
+
+<uso_funcion> ::= ID '(' <lista_expresiones> ')'
+
+<lista_expresiones> ::= <expresion> ',' <lista_expresiones> | <expresion> | lambda
+
+<expresion> ::= <expresion_t1> <op_comp> <expresion> | <expresion_t1>
+
+<expresion_t1> ::= <expresion_t2> <op_t1> <expresion_t1> | <expresion_t2> 
+
+<expresion_t2> ::= <factor> <op_t2> <expresion_t2> | <factor>
+
+<factor> ::= '(' <expresion> ')' | <valor> | <uso_funcion> | <operador_unario> <factor>
+
+<op_t1> ::= '+' | '-'
+
+<op_t2> ::= '*' | '/'
+
+<op_comp> ::= '==' | '>' | '<' | '>=' | '<='
+
+<operador_unario> ::= '-' | NOT
+
+<valor> ::= NUMERO_ENTERO | NUMERO_REAL | CIERTO | FALSO | CARACTER | ID | ID '.' ID | ID '.' long | ID '[' expresion ']'
+
+<condicional> ::= SI <expresion_bool> ENTONCES <sentencias> SINO <sentencias> FINSI | SI <expresion> ENTONCES <sentencias> FINSI
+
+<bucle> ::= MIENTRAS <expresion_bool> <sentencias> FINMIENTRAS
+
+<expresion_bool> ::= <expresion> <op_bool> <expresion>
+
+// TO DO: Acceder a valores de registro y vector, AND OR, y propiedad long para vectores
+// Revisar esto <expresion> ::= <expresion_t1> <op_comp> <expresion> | <expresion_t1> 
+// Preguntas:
+// - Se pueden poner expresiones en el indexado?
+// - Hay que revisar que por ejemplo no se haga expresiones tipo vector[CIERTO], 8 AND CIERTO, SI 'numero' y similares?
+// - Prioridades AND OR, operadores comp y resto.
+// - Hace falta que en el condicional diferencie el tipo de expresion (que solo se permita una expresion booleana?)
