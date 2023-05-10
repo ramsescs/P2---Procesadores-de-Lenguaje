@@ -1,21 +1,3 @@
-"""import sys
-sys.path.insert(0, "../..")
-from myLexer import MyLexer
-# create objects MY LEXER and MY PARSER
-myLex = MyLexer()
-lexer=myLex.lexer
-
-fname="input3.txt"
-try:
-    f = open(fname, 'r')
-except IOError:
-    print ("Archivo no encontrado:", fname)
-s = f.read()
-lexer.input(s)
-file = open("result.txt", 'w')
-file.close()
-
-myLex.test(s)"""
 from myLexer import MyLexer
 
 
@@ -29,7 +11,7 @@ asignacion = []
 palabrasReservadas = []
 saltoLinea = 0
 
-fname = "input3.txt"
+fname = "input.txt"
 
 try:
     f = open(fname, 'r')

@@ -16,8 +16,7 @@ class MyLexer():
     def __del__(self):
         print('Lexer destructor called.')
 
-    # TODO: Revisar bien como funciona esto.  
-    # Pueden escribirse en mayúscula, minúscula o cualquier combinación.
+    # Palabras reservadas del lenguaje
     reserved = {
        'cierto' : 'CIERTO',
        'falso' : 'FALSO',
@@ -55,11 +54,6 @@ class MyLexer():
     def getToken(self):
         return self.tokens
 
-     # A regular expression rule with some action code
-     # Note addition of self parameter since we're in a class
-
-    # Define a rule so we can track line numbers
-
 
     # A string containing ignored characters (spaces and tabs)
     t_ignore = ' \t'
@@ -74,7 +68,6 @@ class MyLexer():
         self.lexer = lex.lex(module=self, **kwargs)
         # self.lexer.num_count = 0
 
-    # Test it output
     def test(self, data):
         self.lexer.input(data)
         while True:
@@ -110,28 +103,13 @@ class MyLexer():
         return t
 
     def t_FINPARRAFO(self, t):
-
         r'\n+'
         t.lexer.lineno += t.value.count("\n")
-        # print(t.lexer[2])
         return t
 
-    # TODO: Probar luego que funciona poniendo esto en literals
     def t_OPCOMPARE(self,t):
         r'(\<\=|\>\=|\>|\<|\=\=)'
         return t
-        
-    """def t_NAME(self, t):
-        r'[a-zA-Z][a-zA-Z0-9_]*'
-        #t.lexer.num_count += 1
-        t.type = self.reserved.get(t.value.lower(),'NAME')
-        if(t.type == "NAME"):
-            global identificador
-            identificador.append(t.value)
-        else:
-            global palabrasReservadas
-            palabrasReservadas.append(t.value)
-        return t"""
 
     def t_NAME(self, t):
         r'[a-zA-Z][a-zA-Z0-9_]*'

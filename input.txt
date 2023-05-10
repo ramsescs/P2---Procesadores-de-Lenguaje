@@ -1,0 +1,3 @@
+booleano var = cierto
+booleano var = CIERTO
+booleano var = CiErTo

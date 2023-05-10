@@ -30,17 +30,21 @@ S ::= <sentencias>
 
 <lista_expresiones> ::= <expresion> ',' <lista_expresiones> | <expresion> | lambda
 
-<expresion> ::= <expresion_t1> <op_comp> <expresion> | <expresion_t1>
+<expresion> ::= <expresion_and> <op_or> <expresion> | <expresion_and>
 
-<expresion_t1> ::= <expresion_t2> <op_t1> <expresion_t1> | <expresion_t2> 
+<expresion_and> ::= <expresion_comp> <op_and> <expresion_and> | <expresion_comp>
 
-<expresion_t2> ::= <factor> <op_t2> <expresion_t2> | <factor>
+<expresion_comp> ::= <expresion_add> <op_comp> <expresion_comp> | <expresion_add>
+
+<expresion_add> ::= <expresion_mult> <op_add> <expresion_add> | <expresion_mult> 
+
+<expresion_mult> ::= <factor> <op_mult> <expresion_mult> | <factor>
 
 <factor> ::= '(' <expresion> ')' | <valor> | <uso_funcion> | <operador_unario> <factor>
 
-<op_t1> ::= '+' | '-'
+<op_add> ::= '+' | '-'
 
-<op_t2> ::= '*' | '/'
+<op_mult> ::= '*' | '/'
 
 <op_comp> ::= '==' | '>' | '<' | '>=' | '<='
 
@@ -48,16 +52,7 @@ S ::= <sentencias>
 
 <valor> ::= NUMERO_ENTERO | NUMERO_REAL | CIERTO | FALSO | CARACTER | ID | ID '.' ID | ID '.' long | ID '[' expresion ']'
 
-<condicional> ::= SI <expresion_bool> ENTONCES <sentencias> SINO <sentencias> FINSI | SI <expresion> ENTONCES <sentencias> FINSI
+<condicional> ::= SI <expresion> ENTONCES <sentencias> SINO <sentencias> FINSI | SI <expresion> ENTONCES <sentencias> FINSI
 
-<bucle> ::= MIENTRAS <expresion_bool> <sentencias> FINMIENTRAS
+<bucle> ::= MIENTRAS <expresion> <sentencias> FINMIENTRAS
 
-<expresion_bool> ::= <expresion> <op_bool> <expresion>
-
-// TO DO: Acceder a valores de registro y vector, AND OR, y propiedad long para vectores
-// Revisar esto <expresion> ::= <expresion_t1> <op_comp> <expresion> | <expresion_t1> 
-// Preguntas:
-// - Se pueden poner expresiones en el indexado?
-// - Hay que revisar que por ejemplo no se haga expresiones tipo vector[CIERTO], 8 AND CIERTO, SI 'numero' y similares?
-// - Prioridades AND OR, operadores comp y resto.
-// - Hace falta que en el condicional diferencie el tipo de expresion (que solo se permita una expresion booleana?)
