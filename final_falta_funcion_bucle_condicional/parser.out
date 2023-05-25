@@ -1,0 +1,3779 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statements
+Rule 1     statements -> statement FINPARRAFO statements
+Rule 2     statements -> expresion FINPARRAFO statements
+Rule 3     statements -> <empty>
+Rule 4     statements1 -> statement FINPARRAFO statements1
+Rule 5     statements1 -> <empty>
+Rule 6     statement -> asignacion
+Rule 7     statement -> def_funcion
+Rule 8     statement -> condicional
+Rule 9     statement -> bucle
+Rule 10    statement -> declaracion
+Rule 11    statement -> declaracion_reg
+Rule 12    statement -> declaracion_vec
+Rule 13    statement -> <empty>
+Rule 14    declaracion -> tipo NAME = expresion
+Rule 15    declaracion -> tipo varios_name
+Rule 16    varios_name -> NAME , varios_name
+Rule 17    varios_name -> NAME
+Rule 18    tipo -> ENTERO
+Rule 19    tipo -> REAL
+Rule 20    tipo -> BOOLEANO
+Rule 21    tipo -> CARACTER
+Rule 22    tipo -> NAME
+Rule 23    declaracion_reg -> REGISTRO NAME { blq_registro }
+Rule 24    blq_registro -> tipo varios_name ; FINPARRAFO blq_registro
+Rule 25    blq_registro -> tipo varios_name ;
+Rule 26    blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+Rule 27    blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ;
+Rule 28    tipo_vector -> ENTERO
+Rule 29    tipo_vector -> REAL
+Rule 30    tipo_vector -> BOOLEANO
+Rule 31    tipo_vector -> CARACTER
+Rule 32    declaracion_vec -> VECTOR tipo_vector NAME [ NUMINTEGER ]
+Rule 33    asignacion -> name_chain = expresion
+Rule 34    asignacion -> name_chain [ expresion ] = expresion
+Rule 35    def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+Rule 36    lista_args -> tipo NAME , lista_args
+Rule 37    lista_args -> tipo NAME
+Rule 38    lista_args -> <empty>
+Rule 39    expresion -> expresion OR expresion_and
+Rule 40    expresion -> expresion | expresion_and
+Rule 41    expresion -> expresion_and
+Rule 42    expresion_and -> expresion_and AND expresion_comp
+Rule 43    expresion_and -> expresion_and & expresion_comp
+Rule 44    expresion_and -> expresion_comp
+Rule 45    expresion_comp -> expresion_comp OPCOMPARE expresion_add
+Rule 46    expresion_comp -> expresion_add
+Rule 47    expresion_add -> expresion_mult + expresion_add
+Rule 48    expresion_add -> expresion_mult - expresion_add
+Rule 49    expresion_add -> expresion_mult
+Rule 50    expresion_mult -> expresion_mult * factor
+Rule 51    expresion_mult -> expresion_mult / factor
+Rule 52    expresion_mult -> factor
+Rule 53    factor -> ( expresion )
+Rule 54    factor -> valor
+Rule 55    factor -> NAME ( lista_expresiones )
+Rule 56    factor -> operador_unario factor
+Rule 57    lista_expresiones -> expresion , lista_expresiones
+Rule 58    lista_expresiones -> expresion
+Rule 59    lista_expresiones -> <empty>
+Rule 60    operador_unario -> -
+Rule 61    operador_unario -> NOT
+Rule 62    operador_unario -> !
+Rule 63    operador_unario -> +
+Rule 64    valor -> NUMREAL
+Rule 65    valor -> NUMINTEGER
+Rule 66    valor -> CIERTO
+Rule 67    valor -> FALSO
+Rule 68    valor -> CARACTERC
+Rule 69    valor -> name_chain
+Rule 70    valor -> name_chain [ expresion ]
+Rule 71    valor -> name_chain . LONG
+Rule 72    condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+Rule 73    condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+Rule 74    bucle -> MIENTRAS expresion statements1 FINMIENTRAS
+Rule 75    name_chain -> NAME
+Rule 76    name_chain -> name_chain . NAME
+
+Terminals, with rules where they appear
+
+!                    : 62
+&                    : 43
+(                    : 35 53 55
+)                    : 35 53 55
+*                    : 50
++                    : 47 63
+,                    : 16 36 57
+-                    : 48 60
+.                    : 71 76
+/                    : 51
+:                    : 35
+;                    : 24 25 26 27
+=                    : 14 33 34
+AND                  : 42
+BOOLEANO             : 20 30
+CARACTER             : 21 31
+CARACTERC            : 68
+CIERTO               : 66
+DEVOLVER             : 35
+ENTERO               : 18 28
+ENTONCES             : 72 73
+FALSO                : 67
+FINMIENTRAS          : 74
+FINPARRAFO           : 1 2 4 24 26 35 35 35 72 72 72 73 73
+FINSI                : 72 73
+FUNCION              : 35
+LONG                 : 71
+MIENTRAS             : 74
+NAME                 : 14 16 17 22 23 26 27 32 35 36 37 55 75 76
+NOT                  : 61
+NUMINTEGER           : 26 27 32 65
+NUMREAL              : 64
+OPCOMPARE            : 45
+OR                   : 39
+REAL                 : 19 29
+REGISTRO             : 23
+SI                   : 72 73
+SINO                 : 72
+VECTOR               : 26 27 32
+[                    : 26 27 32 34 70
+]                    : 26 27 32 34 70
+error                : 
+{                    : 23 35
+|                    : 40
+}                    : 23 35
+
+Nonterminals, with rules where they appear
+
+asignacion           : 6
+blq_registro         : 23 24 26
+bucle                : 9
+condicional          : 8
+declaracion          : 10
+declaracion_reg      : 11
+declaracion_vec      : 12
+def_funcion          : 7
+expresion            : 2 14 33 34 34 35 39 40 53 57 58 70 72 73 74
+expresion_add        : 45 46 47 48
+expresion_and        : 39 40 41 42 43
+expresion_comp       : 42 43 44 45
+expresion_mult       : 47 48 49 50 51
+factor               : 50 51 52 56
+lista_args           : 35 36
+lista_expresiones    : 55 57
+name_chain           : 33 34 69 70 71 76
+operador_unario      : 56
+statement            : 1 4
+statements           : 1 2 0
+statements1          : 4 35 72 72 73 74
+tipo                 : 14 15 24 25 35 36 37
+tipo_vector          : 26 27 32
+valor                : 54
+varios_name          : 15 16 24 25
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statements
+    (1) statements -> . statement FINPARRAFO statements
+    (2) statements -> . expresion FINPARRAFO statements
+    (3) statements -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+
+    $end            reduce using rule 3 (statements -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 14
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    (               shift and go to state 15
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    statements                     shift and go to state 1
+    statement                      shift and go to state 2
+    expresion                      shift and go to state 3
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    expresion_and                  shift and go to state 11
+    name_chain                     shift and go to state 12
+    tipo                           shift and go to state 16
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 1
+
+    (0) S' -> statements .
+
+
+
+state 2
+
+    (1) statements -> statement . FINPARRAFO statements
+
+    FINPARRAFO      shift and go to state 40
+
+
+state 3
+
+    (2) statements -> expresion . FINPARRAFO statements
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      shift and go to state 41
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 4
+
+    (6) statement -> asignacion .
+
+    FINPARRAFO      reduce using rule 6 (statement -> asignacion .)
+
+
+state 5
+
+    (7) statement -> def_funcion .
+
+    FINPARRAFO      reduce using rule 7 (statement -> def_funcion .)
+
+
+state 6
+
+    (8) statement -> condicional .
+
+    FINPARRAFO      reduce using rule 8 (statement -> condicional .)
+
+
+state 7
+
+    (9) statement -> bucle .
+
+    FINPARRAFO      reduce using rule 9 (statement -> bucle .)
+
+
+state 8
+
+    (10) statement -> declaracion .
+
+    FINPARRAFO      reduce using rule 10 (statement -> declaracion .)
+
+
+state 9
+
+    (11) statement -> declaracion_reg .
+
+    FINPARRAFO      reduce using rule 11 (statement -> declaracion_reg .)
+
+
+state 10
+
+    (12) statement -> declaracion_vec .
+
+    FINPARRAFO      reduce using rule 12 (statement -> declaracion_vec .)
+
+
+state 11
+
+    (41) expresion -> expresion_and .
+    (42) expresion_and -> expresion_and . AND expresion_comp
+    (43) expresion_and -> expresion_and . & expresion_comp
+
+    FINPARRAFO      reduce using rule 41 (expresion -> expresion_and .)
+    OR              reduce using rule 41 (expresion -> expresion_and .)
+    |               reduce using rule 41 (expresion -> expresion_and .)
+    )               reduce using rule 41 (expresion -> expresion_and .)
+    FUNCION         reduce using rule 41 (expresion -> expresion_and .)
+    SI              reduce using rule 41 (expresion -> expresion_and .)
+    MIENTRAS        reduce using rule 41 (expresion -> expresion_and .)
+    REGISTRO        reduce using rule 41 (expresion -> expresion_and .)
+    VECTOR          reduce using rule 41 (expresion -> expresion_and .)
+    NAME            reduce using rule 41 (expresion -> expresion_and .)
+    ENTERO          reduce using rule 41 (expresion -> expresion_and .)
+    REAL            reduce using rule 41 (expresion -> expresion_and .)
+    BOOLEANO        reduce using rule 41 (expresion -> expresion_and .)
+    CARACTER        reduce using rule 41 (expresion -> expresion_and .)
+    FINMIENTRAS     reduce using rule 41 (expresion -> expresion_and .)
+    ]               reduce using rule 41 (expresion -> expresion_and .)
+    ,               reduce using rule 41 (expresion -> expresion_and .)
+    AND             shift and go to state 44
+    &               shift and go to state 45
+
+
+state 12
+
+    (33) asignacion -> name_chain . = expresion
+    (34) asignacion -> name_chain . [ expresion ] = expresion
+    (76) name_chain -> name_chain . . NAME
+    (69) valor -> name_chain .
+    (70) valor -> name_chain . [ expresion ]
+    (71) valor -> name_chain . . LONG
+
+    =               shift and go to state 46
+    [               shift and go to state 47
+    .               shift and go to state 48
+    +               reduce using rule 69 (valor -> name_chain .)
+    -               reduce using rule 69 (valor -> name_chain .)
+    *               reduce using rule 69 (valor -> name_chain .)
+    /               reduce using rule 69 (valor -> name_chain .)
+    OPCOMPARE       reduce using rule 69 (valor -> name_chain .)
+    AND             reduce using rule 69 (valor -> name_chain .)
+    &               reduce using rule 69 (valor -> name_chain .)
+    FINPARRAFO      reduce using rule 69 (valor -> name_chain .)
+    OR              reduce using rule 69 (valor -> name_chain .)
+    |               reduce using rule 69 (valor -> name_chain .)
+
+
+state 13
+
+    (35) def_funcion -> FUNCION . NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    NAME            shift and go to state 49
+
+
+state 14
+
+    (75) name_chain -> NAME .
+    (22) tipo -> NAME .
+    (55) factor -> NAME . ( lista_expresiones )
+
+    =               reduce using rule 75 (name_chain -> NAME .)
+    [               reduce using rule 75 (name_chain -> NAME .)
+    .               reduce using rule 75 (name_chain -> NAME .)
+    +               reduce using rule 75 (name_chain -> NAME .)
+    -               reduce using rule 75 (name_chain -> NAME .)
+    *               reduce using rule 75 (name_chain -> NAME .)
+    /               reduce using rule 75 (name_chain -> NAME .)
+    OPCOMPARE       reduce using rule 75 (name_chain -> NAME .)
+    AND             reduce using rule 75 (name_chain -> NAME .)
+    &               reduce using rule 75 (name_chain -> NAME .)
+    FINPARRAFO      reduce using rule 75 (name_chain -> NAME .)
+    OR              reduce using rule 75 (name_chain -> NAME .)
+    |               reduce using rule 75 (name_chain -> NAME .)
+    NAME            reduce using rule 22 (tipo -> NAME .)
+    (               shift and go to state 50
+
+
+state 15
+
+    (53) factor -> ( . expresion )
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 51
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 16
+
+    (14) declaracion -> tipo . NAME = expresion
+    (15) declaracion -> tipo . varios_name
+    (16) varios_name -> . NAME , varios_name
+    (17) varios_name -> . NAME
+
+    NAME            shift and go to state 54
+
+    varios_name                    shift and go to state 55
+
+state 17
+
+    (72) condicional -> SI . expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI . expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 56
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 18
+
+    (74) bucle -> MIENTRAS . expresion statements1 FINMIENTRAS
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 57
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 19
+
+    (23) declaracion_reg -> REGISTRO . NAME { blq_registro }
+
+    NAME            shift and go to state 58
+
+
+state 20
+
+    (32) declaracion_vec -> VECTOR . tipo_vector NAME [ NUMINTEGER ]
+    (28) tipo_vector -> . ENTERO
+    (29) tipo_vector -> . REAL
+    (30) tipo_vector -> . BOOLEANO
+    (31) tipo_vector -> . CARACTER
+
+    ENTERO          shift and go to state 60
+    REAL            shift and go to state 61
+    BOOLEANO        shift and go to state 62
+    CARACTER        shift and go to state 63
+
+    tipo_vector                    shift and go to state 59
+
+state 21
+
+    (65) valor -> NUMINTEGER .
+
+    +               reduce using rule 65 (valor -> NUMINTEGER .)
+    -               reduce using rule 65 (valor -> NUMINTEGER .)
+    *               reduce using rule 65 (valor -> NUMINTEGER .)
+    /               reduce using rule 65 (valor -> NUMINTEGER .)
+    OPCOMPARE       reduce using rule 65 (valor -> NUMINTEGER .)
+    AND             reduce using rule 65 (valor -> NUMINTEGER .)
+    &               reduce using rule 65 (valor -> NUMINTEGER .)
+    FINPARRAFO      reduce using rule 65 (valor -> NUMINTEGER .)
+    OR              reduce using rule 65 (valor -> NUMINTEGER .)
+    |               reduce using rule 65 (valor -> NUMINTEGER .)
+    )               reduce using rule 65 (valor -> NUMINTEGER .)
+    FUNCION         reduce using rule 65 (valor -> NUMINTEGER .)
+    SI              reduce using rule 65 (valor -> NUMINTEGER .)
+    MIENTRAS        reduce using rule 65 (valor -> NUMINTEGER .)
+    REGISTRO        reduce using rule 65 (valor -> NUMINTEGER .)
+    VECTOR          reduce using rule 65 (valor -> NUMINTEGER .)
+    NAME            reduce using rule 65 (valor -> NUMINTEGER .)
+    ENTERO          reduce using rule 65 (valor -> NUMINTEGER .)
+    REAL            reduce using rule 65 (valor -> NUMINTEGER .)
+    BOOLEANO        reduce using rule 65 (valor -> NUMINTEGER .)
+    CARACTER        reduce using rule 65 (valor -> NUMINTEGER .)
+    FINMIENTRAS     reduce using rule 65 (valor -> NUMINTEGER .)
+    ]               reduce using rule 65 (valor -> NUMINTEGER .)
+    ,               reduce using rule 65 (valor -> NUMINTEGER .)
+
+
+state 22
+
+    (44) expresion_and -> expresion_comp .
+    (45) expresion_comp -> expresion_comp . OPCOMPARE expresion_add
+
+    AND             reduce using rule 44 (expresion_and -> expresion_comp .)
+    &               reduce using rule 44 (expresion_and -> expresion_comp .)
+    FINPARRAFO      reduce using rule 44 (expresion_and -> expresion_comp .)
+    OR              reduce using rule 44 (expresion_and -> expresion_comp .)
+    |               reduce using rule 44 (expresion_and -> expresion_comp .)
+    )               reduce using rule 44 (expresion_and -> expresion_comp .)
+    FUNCION         reduce using rule 44 (expresion_and -> expresion_comp .)
+    SI              reduce using rule 44 (expresion_and -> expresion_comp .)
+    MIENTRAS        reduce using rule 44 (expresion_and -> expresion_comp .)
+    REGISTRO        reduce using rule 44 (expresion_and -> expresion_comp .)
+    VECTOR          reduce using rule 44 (expresion_and -> expresion_comp .)
+    NAME            reduce using rule 44 (expresion_and -> expresion_comp .)
+    ENTERO          reduce using rule 44 (expresion_and -> expresion_comp .)
+    REAL            reduce using rule 44 (expresion_and -> expresion_comp .)
+    BOOLEANO        reduce using rule 44 (expresion_and -> expresion_comp .)
+    CARACTER        reduce using rule 44 (expresion_and -> expresion_comp .)
+    FINMIENTRAS     reduce using rule 44 (expresion_and -> expresion_comp .)
+    ]               reduce using rule 44 (expresion_and -> expresion_comp .)
+    ,               reduce using rule 44 (expresion_and -> expresion_comp .)
+    OPCOMPARE       shift and go to state 64
+
+
+state 23
+
+    (18) tipo -> ENTERO .
+
+    NAME            reduce using rule 18 (tipo -> ENTERO .)
+    FINPARRAFO      reduce using rule 18 (tipo -> ENTERO .)
+
+
+state 24
+
+    (19) tipo -> REAL .
+
+    NAME            reduce using rule 19 (tipo -> REAL .)
+    FINPARRAFO      reduce using rule 19 (tipo -> REAL .)
+
+
+state 25
+
+    (20) tipo -> BOOLEANO .
+
+    NAME            reduce using rule 20 (tipo -> BOOLEANO .)
+    FINPARRAFO      reduce using rule 20 (tipo -> BOOLEANO .)
+
+
+state 26
+
+    (21) tipo -> CARACTER .
+
+    NAME            reduce using rule 21 (tipo -> CARACTER .)
+    FINPARRAFO      reduce using rule 21 (tipo -> CARACTER .)
+
+
+state 27
+
+    (46) expresion_comp -> expresion_add .
+
+    OPCOMPARE       reduce using rule 46 (expresion_comp -> expresion_add .)
+    AND             reduce using rule 46 (expresion_comp -> expresion_add .)
+    &               reduce using rule 46 (expresion_comp -> expresion_add .)
+    FINPARRAFO      reduce using rule 46 (expresion_comp -> expresion_add .)
+    OR              reduce using rule 46 (expresion_comp -> expresion_add .)
+    |               reduce using rule 46 (expresion_comp -> expresion_add .)
+    )               reduce using rule 46 (expresion_comp -> expresion_add .)
+    FUNCION         reduce using rule 46 (expresion_comp -> expresion_add .)
+    SI              reduce using rule 46 (expresion_comp -> expresion_add .)
+    MIENTRAS        reduce using rule 46 (expresion_comp -> expresion_add .)
+    REGISTRO        reduce using rule 46 (expresion_comp -> expresion_add .)
+    VECTOR          reduce using rule 46 (expresion_comp -> expresion_add .)
+    NAME            reduce using rule 46 (expresion_comp -> expresion_add .)
+    ENTERO          reduce using rule 46 (expresion_comp -> expresion_add .)
+    REAL            reduce using rule 46 (expresion_comp -> expresion_add .)
+    BOOLEANO        reduce using rule 46 (expresion_comp -> expresion_add .)
+    CARACTER        reduce using rule 46 (expresion_comp -> expresion_add .)
+    FINMIENTRAS     reduce using rule 46 (expresion_comp -> expresion_add .)
+    ]               reduce using rule 46 (expresion_comp -> expresion_add .)
+    ,               reduce using rule 46 (expresion_comp -> expresion_add .)
+
+
+state 28
+
+    (47) expresion_add -> expresion_mult . + expresion_add
+    (48) expresion_add -> expresion_mult . - expresion_add
+    (49) expresion_add -> expresion_mult .
+    (50) expresion_mult -> expresion_mult . * factor
+    (51) expresion_mult -> expresion_mult . / factor
+
+    +               shift and go to state 65
+    -               shift and go to state 66
+    OPCOMPARE       reduce using rule 49 (expresion_add -> expresion_mult .)
+    AND             reduce using rule 49 (expresion_add -> expresion_mult .)
+    &               reduce using rule 49 (expresion_add -> expresion_mult .)
+    FINPARRAFO      reduce using rule 49 (expresion_add -> expresion_mult .)
+    OR              reduce using rule 49 (expresion_add -> expresion_mult .)
+    |               reduce using rule 49 (expresion_add -> expresion_mult .)
+    )               reduce using rule 49 (expresion_add -> expresion_mult .)
+    FUNCION         reduce using rule 49 (expresion_add -> expresion_mult .)
+    SI              reduce using rule 49 (expresion_add -> expresion_mult .)
+    MIENTRAS        reduce using rule 49 (expresion_add -> expresion_mult .)
+    REGISTRO        reduce using rule 49 (expresion_add -> expresion_mult .)
+    VECTOR          reduce using rule 49 (expresion_add -> expresion_mult .)
+    NAME            reduce using rule 49 (expresion_add -> expresion_mult .)
+    ENTERO          reduce using rule 49 (expresion_add -> expresion_mult .)
+    REAL            reduce using rule 49 (expresion_add -> expresion_mult .)
+    BOOLEANO        reduce using rule 49 (expresion_add -> expresion_mult .)
+    CARACTER        reduce using rule 49 (expresion_add -> expresion_mult .)
+    FINMIENTRAS     reduce using rule 49 (expresion_add -> expresion_mult .)
+    ]               reduce using rule 49 (expresion_add -> expresion_mult .)
+    ,               reduce using rule 49 (expresion_add -> expresion_mult .)
+    *               shift and go to state 67
+    /               shift and go to state 68
+
+
+state 29
+
+    (63) operador_unario -> + .
+
+    (               reduce using rule 63 (operador_unario -> + .)
+    NAME            reduce using rule 63 (operador_unario -> + .)
+    NUMREAL         reduce using rule 63 (operador_unario -> + .)
+    NUMINTEGER      reduce using rule 63 (operador_unario -> + .)
+    CIERTO          reduce using rule 63 (operador_unario -> + .)
+    FALSO           reduce using rule 63 (operador_unario -> + .)
+    CARACTERC       reduce using rule 63 (operador_unario -> + .)
+    -               reduce using rule 63 (operador_unario -> + .)
+    NOT             reduce using rule 63 (operador_unario -> + .)
+    !               reduce using rule 63 (operador_unario -> + .)
+    +               reduce using rule 63 (operador_unario -> + .)
+
+
+state 30
+
+    (60) operador_unario -> - .
+
+    (               reduce using rule 60 (operador_unario -> - .)
+    NAME            reduce using rule 60 (operador_unario -> - .)
+    NUMREAL         reduce using rule 60 (operador_unario -> - .)
+    NUMINTEGER      reduce using rule 60 (operador_unario -> - .)
+    CIERTO          reduce using rule 60 (operador_unario -> - .)
+    FALSO           reduce using rule 60 (operador_unario -> - .)
+    CARACTERC       reduce using rule 60 (operador_unario -> - .)
+    -               reduce using rule 60 (operador_unario -> - .)
+    NOT             reduce using rule 60 (operador_unario -> - .)
+    !               reduce using rule 60 (operador_unario -> - .)
+    +               reduce using rule 60 (operador_unario -> - .)
+
+
+state 31
+
+    (52) expresion_mult -> factor .
+
+    +               reduce using rule 52 (expresion_mult -> factor .)
+    -               reduce using rule 52 (expresion_mult -> factor .)
+    *               reduce using rule 52 (expresion_mult -> factor .)
+    /               reduce using rule 52 (expresion_mult -> factor .)
+    OPCOMPARE       reduce using rule 52 (expresion_mult -> factor .)
+    AND             reduce using rule 52 (expresion_mult -> factor .)
+    &               reduce using rule 52 (expresion_mult -> factor .)
+    FINPARRAFO      reduce using rule 52 (expresion_mult -> factor .)
+    OR              reduce using rule 52 (expresion_mult -> factor .)
+    |               reduce using rule 52 (expresion_mult -> factor .)
+    )               reduce using rule 52 (expresion_mult -> factor .)
+    FUNCION         reduce using rule 52 (expresion_mult -> factor .)
+    SI              reduce using rule 52 (expresion_mult -> factor .)
+    MIENTRAS        reduce using rule 52 (expresion_mult -> factor .)
+    REGISTRO        reduce using rule 52 (expresion_mult -> factor .)
+    VECTOR          reduce using rule 52 (expresion_mult -> factor .)
+    NAME            reduce using rule 52 (expresion_mult -> factor .)
+    ENTERO          reduce using rule 52 (expresion_mult -> factor .)
+    REAL            reduce using rule 52 (expresion_mult -> factor .)
+    BOOLEANO        reduce using rule 52 (expresion_mult -> factor .)
+    CARACTER        reduce using rule 52 (expresion_mult -> factor .)
+    FINMIENTRAS     reduce using rule 52 (expresion_mult -> factor .)
+    ]               reduce using rule 52 (expresion_mult -> factor .)
+    ,               reduce using rule 52 (expresion_mult -> factor .)
+
+
+state 32
+
+    (54) factor -> valor .
+
+    +               reduce using rule 54 (factor -> valor .)
+    -               reduce using rule 54 (factor -> valor .)
+    *               reduce using rule 54 (factor -> valor .)
+    /               reduce using rule 54 (factor -> valor .)
+    OPCOMPARE       reduce using rule 54 (factor -> valor .)
+    AND             reduce using rule 54 (factor -> valor .)
+    &               reduce using rule 54 (factor -> valor .)
+    FINPARRAFO      reduce using rule 54 (factor -> valor .)
+    OR              reduce using rule 54 (factor -> valor .)
+    |               reduce using rule 54 (factor -> valor .)
+    )               reduce using rule 54 (factor -> valor .)
+    FUNCION         reduce using rule 54 (factor -> valor .)
+    SI              reduce using rule 54 (factor -> valor .)
+    MIENTRAS        reduce using rule 54 (factor -> valor .)
+    REGISTRO        reduce using rule 54 (factor -> valor .)
+    VECTOR          reduce using rule 54 (factor -> valor .)
+    NAME            reduce using rule 54 (factor -> valor .)
+    ENTERO          reduce using rule 54 (factor -> valor .)
+    REAL            reduce using rule 54 (factor -> valor .)
+    BOOLEANO        reduce using rule 54 (factor -> valor .)
+    CARACTER        reduce using rule 54 (factor -> valor .)
+    FINMIENTRAS     reduce using rule 54 (factor -> valor .)
+    ]               reduce using rule 54 (factor -> valor .)
+    ,               reduce using rule 54 (factor -> valor .)
+
+
+state 33
+
+    (56) factor -> operador_unario . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    operador_unario                shift and go to state 33
+    factor                         shift and go to state 69
+    valor                          shift and go to state 32
+    name_chain                     shift and go to state 53
+
+state 34
+
+    (64) valor -> NUMREAL .
+
+    +               reduce using rule 64 (valor -> NUMREAL .)
+    -               reduce using rule 64 (valor -> NUMREAL .)
+    *               reduce using rule 64 (valor -> NUMREAL .)
+    /               reduce using rule 64 (valor -> NUMREAL .)
+    OPCOMPARE       reduce using rule 64 (valor -> NUMREAL .)
+    AND             reduce using rule 64 (valor -> NUMREAL .)
+    &               reduce using rule 64 (valor -> NUMREAL .)
+    FINPARRAFO      reduce using rule 64 (valor -> NUMREAL .)
+    OR              reduce using rule 64 (valor -> NUMREAL .)
+    |               reduce using rule 64 (valor -> NUMREAL .)
+    )               reduce using rule 64 (valor -> NUMREAL .)
+    FUNCION         reduce using rule 64 (valor -> NUMREAL .)
+    SI              reduce using rule 64 (valor -> NUMREAL .)
+    MIENTRAS        reduce using rule 64 (valor -> NUMREAL .)
+    REGISTRO        reduce using rule 64 (valor -> NUMREAL .)
+    VECTOR          reduce using rule 64 (valor -> NUMREAL .)
+    NAME            reduce using rule 64 (valor -> NUMREAL .)
+    ENTERO          reduce using rule 64 (valor -> NUMREAL .)
+    REAL            reduce using rule 64 (valor -> NUMREAL .)
+    BOOLEANO        reduce using rule 64 (valor -> NUMREAL .)
+    CARACTER        reduce using rule 64 (valor -> NUMREAL .)
+    FINMIENTRAS     reduce using rule 64 (valor -> NUMREAL .)
+    ]               reduce using rule 64 (valor -> NUMREAL .)
+    ,               reduce using rule 64 (valor -> NUMREAL .)
+
+
+state 35
+
+    (66) valor -> CIERTO .
+
+    +               reduce using rule 66 (valor -> CIERTO .)
+    -               reduce using rule 66 (valor -> CIERTO .)
+    *               reduce using rule 66 (valor -> CIERTO .)
+    /               reduce using rule 66 (valor -> CIERTO .)
+    OPCOMPARE       reduce using rule 66 (valor -> CIERTO .)
+    AND             reduce using rule 66 (valor -> CIERTO .)
+    &               reduce using rule 66 (valor -> CIERTO .)
+    FINPARRAFO      reduce using rule 66 (valor -> CIERTO .)
+    OR              reduce using rule 66 (valor -> CIERTO .)
+    |               reduce using rule 66 (valor -> CIERTO .)
+    )               reduce using rule 66 (valor -> CIERTO .)
+    FUNCION         reduce using rule 66 (valor -> CIERTO .)
+    SI              reduce using rule 66 (valor -> CIERTO .)
+    MIENTRAS        reduce using rule 66 (valor -> CIERTO .)
+    REGISTRO        reduce using rule 66 (valor -> CIERTO .)
+    VECTOR          reduce using rule 66 (valor -> CIERTO .)
+    NAME            reduce using rule 66 (valor -> CIERTO .)
+    ENTERO          reduce using rule 66 (valor -> CIERTO .)
+    REAL            reduce using rule 66 (valor -> CIERTO .)
+    BOOLEANO        reduce using rule 66 (valor -> CIERTO .)
+    CARACTER        reduce using rule 66 (valor -> CIERTO .)
+    FINMIENTRAS     reduce using rule 66 (valor -> CIERTO .)
+    ]               reduce using rule 66 (valor -> CIERTO .)
+    ,               reduce using rule 66 (valor -> CIERTO .)
+
+
+state 36
+
+    (67) valor -> FALSO .
+
+    +               reduce using rule 67 (valor -> FALSO .)
+    -               reduce using rule 67 (valor -> FALSO .)
+    *               reduce using rule 67 (valor -> FALSO .)
+    /               reduce using rule 67 (valor -> FALSO .)
+    OPCOMPARE       reduce using rule 67 (valor -> FALSO .)
+    AND             reduce using rule 67 (valor -> FALSO .)
+    &               reduce using rule 67 (valor -> FALSO .)
+    FINPARRAFO      reduce using rule 67 (valor -> FALSO .)
+    OR              reduce using rule 67 (valor -> FALSO .)
+    |               reduce using rule 67 (valor -> FALSO .)
+    )               reduce using rule 67 (valor -> FALSO .)
+    FUNCION         reduce using rule 67 (valor -> FALSO .)
+    SI              reduce using rule 67 (valor -> FALSO .)
+    MIENTRAS        reduce using rule 67 (valor -> FALSO .)
+    REGISTRO        reduce using rule 67 (valor -> FALSO .)
+    VECTOR          reduce using rule 67 (valor -> FALSO .)
+    NAME            reduce using rule 67 (valor -> FALSO .)
+    ENTERO          reduce using rule 67 (valor -> FALSO .)
+    REAL            reduce using rule 67 (valor -> FALSO .)
+    BOOLEANO        reduce using rule 67 (valor -> FALSO .)
+    CARACTER        reduce using rule 67 (valor -> FALSO .)
+    FINMIENTRAS     reduce using rule 67 (valor -> FALSO .)
+    ]               reduce using rule 67 (valor -> FALSO .)
+    ,               reduce using rule 67 (valor -> FALSO .)
+
+
+state 37
+
+    (68) valor -> CARACTERC .
+
+    +               reduce using rule 68 (valor -> CARACTERC .)
+    -               reduce using rule 68 (valor -> CARACTERC .)
+    *               reduce using rule 68 (valor -> CARACTERC .)
+    /               reduce using rule 68 (valor -> CARACTERC .)
+    OPCOMPARE       reduce using rule 68 (valor -> CARACTERC .)
+    AND             reduce using rule 68 (valor -> CARACTERC .)
+    &               reduce using rule 68 (valor -> CARACTERC .)
+    FINPARRAFO      reduce using rule 68 (valor -> CARACTERC .)
+    OR              reduce using rule 68 (valor -> CARACTERC .)
+    |               reduce using rule 68 (valor -> CARACTERC .)
+    )               reduce using rule 68 (valor -> CARACTERC .)
+    FUNCION         reduce using rule 68 (valor -> CARACTERC .)
+    SI              reduce using rule 68 (valor -> CARACTERC .)
+    MIENTRAS        reduce using rule 68 (valor -> CARACTERC .)
+    REGISTRO        reduce using rule 68 (valor -> CARACTERC .)
+    VECTOR          reduce using rule 68 (valor -> CARACTERC .)
+    NAME            reduce using rule 68 (valor -> CARACTERC .)
+    ENTERO          reduce using rule 68 (valor -> CARACTERC .)
+    REAL            reduce using rule 68 (valor -> CARACTERC .)
+    BOOLEANO        reduce using rule 68 (valor -> CARACTERC .)
+    CARACTER        reduce using rule 68 (valor -> CARACTERC .)
+    FINMIENTRAS     reduce using rule 68 (valor -> CARACTERC .)
+    ]               reduce using rule 68 (valor -> CARACTERC .)
+    ,               reduce using rule 68 (valor -> CARACTERC .)
+
+
+state 38
+
+    (61) operador_unario -> NOT .
+
+    (               reduce using rule 61 (operador_unario -> NOT .)
+    NAME            reduce using rule 61 (operador_unario -> NOT .)
+    NUMREAL         reduce using rule 61 (operador_unario -> NOT .)
+    NUMINTEGER      reduce using rule 61 (operador_unario -> NOT .)
+    CIERTO          reduce using rule 61 (operador_unario -> NOT .)
+    FALSO           reduce using rule 61 (operador_unario -> NOT .)
+    CARACTERC       reduce using rule 61 (operador_unario -> NOT .)
+    -               reduce using rule 61 (operador_unario -> NOT .)
+    NOT             reduce using rule 61 (operador_unario -> NOT .)
+    !               reduce using rule 61 (operador_unario -> NOT .)
+    +               reduce using rule 61 (operador_unario -> NOT .)
+
+
+state 39
+
+    (62) operador_unario -> ! .
+
+    (               reduce using rule 62 (operador_unario -> ! .)
+    NAME            reduce using rule 62 (operador_unario -> ! .)
+    NUMREAL         reduce using rule 62 (operador_unario -> ! .)
+    NUMINTEGER      reduce using rule 62 (operador_unario -> ! .)
+    CIERTO          reduce using rule 62 (operador_unario -> ! .)
+    FALSO           reduce using rule 62 (operador_unario -> ! .)
+    CARACTERC       reduce using rule 62 (operador_unario -> ! .)
+    -               reduce using rule 62 (operador_unario -> ! .)
+    NOT             reduce using rule 62 (operador_unario -> ! .)
+    !               reduce using rule 62 (operador_unario -> ! .)
+    +               reduce using rule 62 (operador_unario -> ! .)
+
+
+state 40
+
+    (1) statements -> statement FINPARRAFO . statements
+    (1) statements -> . statement FINPARRAFO statements
+    (2) statements -> . expresion FINPARRAFO statements
+    (3) statements -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+
+    $end            reduce using rule 3 (statements -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 14
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    (               shift and go to state 15
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    statement                      shift and go to state 2
+    statements                     shift and go to state 70
+    expresion                      shift and go to state 3
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    expresion_and                  shift and go to state 11
+    name_chain                     shift and go to state 12
+    tipo                           shift and go to state 16
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 41
+
+    (2) statements -> expresion FINPARRAFO . statements
+    (1) statements -> . statement FINPARRAFO statements
+    (2) statements -> . expresion FINPARRAFO statements
+    (3) statements -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+
+    $end            reduce using rule 3 (statements -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 14
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    (               shift and go to state 15
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 3
+    statements                     shift and go to state 71
+    statement                      shift and go to state 2
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    expresion_and                  shift and go to state 11
+    name_chain                     shift and go to state 12
+    tipo                           shift and go to state 16
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 42
+
+    (39) expresion -> expresion OR . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_and                  shift and go to state 72
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 43
+
+    (40) expresion -> expresion | . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_and                  shift and go to state 73
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 44
+
+    (42) expresion_and -> expresion_and AND . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_comp                 shift and go to state 74
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 45
+
+    (43) expresion_and -> expresion_and & . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_comp                 shift and go to state 75
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 46
+
+    (33) asignacion -> name_chain = . expresion
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    name_chain                     shift and go to state 53
+    expresion                      shift and go to state 76
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 47
+
+    (34) asignacion -> name_chain [ . expresion ] = expresion
+    (70) valor -> name_chain [ . expresion ]
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    name_chain                     shift and go to state 53
+    expresion                      shift and go to state 77
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 48
+
+    (76) name_chain -> name_chain . . NAME
+    (71) valor -> name_chain . . LONG
+
+    NAME            shift and go to state 78
+    LONG            shift and go to state 79
+
+
+state 49
+
+    (35) def_funcion -> FUNCION NAME . ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    (               shift and go to state 80
+
+
+state 50
+
+    (55) factor -> NAME ( . lista_expresiones )
+    (57) lista_expresiones -> . expresion , lista_expresiones
+    (58) lista_expresiones -> . expresion
+    (59) lista_expresiones -> .
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    )               reduce using rule 59 (lista_expresiones -> .)
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    lista_expresiones              shift and go to state 81
+    expresion                      shift and go to state 82
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 51
+
+    (53) factor -> ( expresion . )
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    )               shift and go to state 83
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 52
+
+    (55) factor -> NAME . ( lista_expresiones )
+    (75) name_chain -> NAME .
+
+    (               shift and go to state 50
+    [               reduce using rule 75 (name_chain -> NAME .)
+    .               reduce using rule 75 (name_chain -> NAME .)
+    +               reduce using rule 75 (name_chain -> NAME .)
+    -               reduce using rule 75 (name_chain -> NAME .)
+    *               reduce using rule 75 (name_chain -> NAME .)
+    /               reduce using rule 75 (name_chain -> NAME .)
+    OPCOMPARE       reduce using rule 75 (name_chain -> NAME .)
+    AND             reduce using rule 75 (name_chain -> NAME .)
+    &               reduce using rule 75 (name_chain -> NAME .)
+    )               reduce using rule 75 (name_chain -> NAME .)
+    OR              reduce using rule 75 (name_chain -> NAME .)
+    |               reduce using rule 75 (name_chain -> NAME .)
+    FINPARRAFO      reduce using rule 75 (name_chain -> NAME .)
+    FUNCION         reduce using rule 75 (name_chain -> NAME .)
+    SI              reduce using rule 75 (name_chain -> NAME .)
+    MIENTRAS        reduce using rule 75 (name_chain -> NAME .)
+    REGISTRO        reduce using rule 75 (name_chain -> NAME .)
+    VECTOR          reduce using rule 75 (name_chain -> NAME .)
+    NAME            reduce using rule 75 (name_chain -> NAME .)
+    ENTERO          reduce using rule 75 (name_chain -> NAME .)
+    REAL            reduce using rule 75 (name_chain -> NAME .)
+    BOOLEANO        reduce using rule 75 (name_chain -> NAME .)
+    CARACTER        reduce using rule 75 (name_chain -> NAME .)
+    FINMIENTRAS     reduce using rule 75 (name_chain -> NAME .)
+    ]               reduce using rule 75 (name_chain -> NAME .)
+    ,               reduce using rule 75 (name_chain -> NAME .)
+
+
+state 53
+
+    (69) valor -> name_chain .
+    (70) valor -> name_chain . [ expresion ]
+    (71) valor -> name_chain . . LONG
+    (76) name_chain -> name_chain . . NAME
+
+    +               reduce using rule 69 (valor -> name_chain .)
+    -               reduce using rule 69 (valor -> name_chain .)
+    *               reduce using rule 69 (valor -> name_chain .)
+    /               reduce using rule 69 (valor -> name_chain .)
+    OPCOMPARE       reduce using rule 69 (valor -> name_chain .)
+    AND             reduce using rule 69 (valor -> name_chain .)
+    &               reduce using rule 69 (valor -> name_chain .)
+    )               reduce using rule 69 (valor -> name_chain .)
+    OR              reduce using rule 69 (valor -> name_chain .)
+    |               reduce using rule 69 (valor -> name_chain .)
+    FINPARRAFO      reduce using rule 69 (valor -> name_chain .)
+    FUNCION         reduce using rule 69 (valor -> name_chain .)
+    SI              reduce using rule 69 (valor -> name_chain .)
+    MIENTRAS        reduce using rule 69 (valor -> name_chain .)
+    REGISTRO        reduce using rule 69 (valor -> name_chain .)
+    VECTOR          reduce using rule 69 (valor -> name_chain .)
+    NAME            reduce using rule 69 (valor -> name_chain .)
+    ENTERO          reduce using rule 69 (valor -> name_chain .)
+    REAL            reduce using rule 69 (valor -> name_chain .)
+    BOOLEANO        reduce using rule 69 (valor -> name_chain .)
+    CARACTER        reduce using rule 69 (valor -> name_chain .)
+    FINMIENTRAS     reduce using rule 69 (valor -> name_chain .)
+    ]               reduce using rule 69 (valor -> name_chain .)
+    ,               reduce using rule 69 (valor -> name_chain .)
+    [               shift and go to state 84
+    .               shift and go to state 85
+
+
+state 54
+
+    (14) declaracion -> tipo NAME . = expresion
+    (16) varios_name -> NAME . , varios_name
+    (17) varios_name -> NAME .
+
+    =               shift and go to state 86
+    ,               shift and go to state 87
+    FINPARRAFO      reduce using rule 17 (varios_name -> NAME .)
+
+
+state 55
+
+    (15) declaracion -> tipo varios_name .
+
+    FINPARRAFO      reduce using rule 15 (declaracion -> tipo varios_name .)
+
+
+state 56
+
+    (72) condicional -> SI expresion . FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI expresion . FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      shift and go to state 88
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 57
+
+    (74) bucle -> MIENTRAS expresion . statements1 FINMIENTRAS
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+    (4) statements1 -> . statement FINPARRAFO statements1
+    (5) statements1 -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    OR              shift and go to state 42
+    |               shift and go to state 43
+    FINMIENTRAS     reduce using rule 5 (statements1 -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 92
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+
+    statements1                    shift and go to state 89
+    statement                      shift and go to state 90
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    name_chain                     shift and go to state 91
+    tipo                           shift and go to state 16
+
+state 58
+
+    (23) declaracion_reg -> REGISTRO NAME . { blq_registro }
+
+    {               shift and go to state 93
+
+
+state 59
+
+    (32) declaracion_vec -> VECTOR tipo_vector . NAME [ NUMINTEGER ]
+
+    NAME            shift and go to state 94
+
+
+state 60
+
+    (28) tipo_vector -> ENTERO .
+
+    NAME            reduce using rule 28 (tipo_vector -> ENTERO .)
+
+
+state 61
+
+    (29) tipo_vector -> REAL .
+
+    NAME            reduce using rule 29 (tipo_vector -> REAL .)
+
+
+state 62
+
+    (30) tipo_vector -> BOOLEANO .
+
+    NAME            reduce using rule 30 (tipo_vector -> BOOLEANO .)
+
+
+state 63
+
+    (31) tipo_vector -> CARACTER .
+
+    NAME            reduce using rule 31 (tipo_vector -> CARACTER .)
+
+
+state 64
+
+    (45) expresion_comp -> expresion_comp OPCOMPARE . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_add                  shift and go to state 95
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 65
+
+    (47) expresion_add -> expresion_mult + . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_mult                 shift and go to state 28
+    expresion_add                  shift and go to state 96
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 66
+
+    (48) expresion_add -> expresion_mult - . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion_mult                 shift and go to state 28
+    expresion_add                  shift and go to state 97
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 67
+
+    (50) expresion_mult -> expresion_mult * . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    factor                         shift and go to state 98
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 68
+
+    (51) expresion_mult -> expresion_mult / . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    factor                         shift and go to state 99
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 69
+
+    (56) factor -> operador_unario factor .
+
+    +               reduce using rule 56 (factor -> operador_unario factor .)
+    -               reduce using rule 56 (factor -> operador_unario factor .)
+    *               reduce using rule 56 (factor -> operador_unario factor .)
+    /               reduce using rule 56 (factor -> operador_unario factor .)
+    OPCOMPARE       reduce using rule 56 (factor -> operador_unario factor .)
+    AND             reduce using rule 56 (factor -> operador_unario factor .)
+    &               reduce using rule 56 (factor -> operador_unario factor .)
+    FINPARRAFO      reduce using rule 56 (factor -> operador_unario factor .)
+    OR              reduce using rule 56 (factor -> operador_unario factor .)
+    |               reduce using rule 56 (factor -> operador_unario factor .)
+    )               reduce using rule 56 (factor -> operador_unario factor .)
+    FUNCION         reduce using rule 56 (factor -> operador_unario factor .)
+    SI              reduce using rule 56 (factor -> operador_unario factor .)
+    MIENTRAS        reduce using rule 56 (factor -> operador_unario factor .)
+    REGISTRO        reduce using rule 56 (factor -> operador_unario factor .)
+    VECTOR          reduce using rule 56 (factor -> operador_unario factor .)
+    NAME            reduce using rule 56 (factor -> operador_unario factor .)
+    ENTERO          reduce using rule 56 (factor -> operador_unario factor .)
+    REAL            reduce using rule 56 (factor -> operador_unario factor .)
+    BOOLEANO        reduce using rule 56 (factor -> operador_unario factor .)
+    CARACTER        reduce using rule 56 (factor -> operador_unario factor .)
+    FINMIENTRAS     reduce using rule 56 (factor -> operador_unario factor .)
+    ]               reduce using rule 56 (factor -> operador_unario factor .)
+    ,               reduce using rule 56 (factor -> operador_unario factor .)
+
+
+state 70
+
+    (1) statements -> statement FINPARRAFO statements .
+
+    $end            reduce using rule 1 (statements -> statement FINPARRAFO statements .)
+
+
+state 71
+
+    (2) statements -> expresion FINPARRAFO statements .
+
+    $end            reduce using rule 2 (statements -> expresion FINPARRAFO statements .)
+
+
+state 72
+
+    (39) expresion -> expresion OR expresion_and .
+    (42) expresion_and -> expresion_and . AND expresion_comp
+    (43) expresion_and -> expresion_and . & expresion_comp
+
+    FINPARRAFO      reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    OR              reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    |               reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    )               reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    FUNCION         reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    SI              reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    MIENTRAS        reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    REGISTRO        reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    VECTOR          reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    NAME            reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    ENTERO          reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    REAL            reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    BOOLEANO        reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    CARACTER        reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    FINMIENTRAS     reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    ]               reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    ,               reduce using rule 39 (expresion -> expresion OR expresion_and .)
+    AND             shift and go to state 44
+    &               shift and go to state 45
+
+
+state 73
+
+    (40) expresion -> expresion | expresion_and .
+    (42) expresion_and -> expresion_and . AND expresion_comp
+    (43) expresion_and -> expresion_and . & expresion_comp
+
+    FINPARRAFO      reduce using rule 40 (expresion -> expresion | expresion_and .)
+    OR              reduce using rule 40 (expresion -> expresion | expresion_and .)
+    |               reduce using rule 40 (expresion -> expresion | expresion_and .)
+    )               reduce using rule 40 (expresion -> expresion | expresion_and .)
+    FUNCION         reduce using rule 40 (expresion -> expresion | expresion_and .)
+    SI              reduce using rule 40 (expresion -> expresion | expresion_and .)
+    MIENTRAS        reduce using rule 40 (expresion -> expresion | expresion_and .)
+    REGISTRO        reduce using rule 40 (expresion -> expresion | expresion_and .)
+    VECTOR          reduce using rule 40 (expresion -> expresion | expresion_and .)
+    NAME            reduce using rule 40 (expresion -> expresion | expresion_and .)
+    ENTERO          reduce using rule 40 (expresion -> expresion | expresion_and .)
+    REAL            reduce using rule 40 (expresion -> expresion | expresion_and .)
+    BOOLEANO        reduce using rule 40 (expresion -> expresion | expresion_and .)
+    CARACTER        reduce using rule 40 (expresion -> expresion | expresion_and .)
+    FINMIENTRAS     reduce using rule 40 (expresion -> expresion | expresion_and .)
+    ]               reduce using rule 40 (expresion -> expresion | expresion_and .)
+    ,               reduce using rule 40 (expresion -> expresion | expresion_and .)
+    AND             shift and go to state 44
+    &               shift and go to state 45
+
+
+state 74
+
+    (42) expresion_and -> expresion_and AND expresion_comp .
+    (45) expresion_comp -> expresion_comp . OPCOMPARE expresion_add
+
+    AND             reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    &               reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    FINPARRAFO      reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    OR              reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    |               reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    )               reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    FUNCION         reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    SI              reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    MIENTRAS        reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    REGISTRO        reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    VECTOR          reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    NAME            reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    ENTERO          reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    REAL            reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    BOOLEANO        reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    CARACTER        reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    FINMIENTRAS     reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    ]               reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    ,               reduce using rule 42 (expresion_and -> expresion_and AND expresion_comp .)
+    OPCOMPARE       shift and go to state 64
+
+
+state 75
+
+    (43) expresion_and -> expresion_and & expresion_comp .
+    (45) expresion_comp -> expresion_comp . OPCOMPARE expresion_add
+
+    AND             reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    &               reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    FINPARRAFO      reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    OR              reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    |               reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    )               reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    FUNCION         reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    SI              reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    MIENTRAS        reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    REGISTRO        reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    VECTOR          reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    NAME            reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    ENTERO          reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    REAL            reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    BOOLEANO        reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    CARACTER        reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    FINMIENTRAS     reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    ]               reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    ,               reduce using rule 43 (expresion_and -> expresion_and & expresion_comp .)
+    OPCOMPARE       shift and go to state 64
+
+
+state 76
+
+    (33) asignacion -> name_chain = expresion .
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      reduce using rule 33 (asignacion -> name_chain = expresion .)
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 77
+
+    (34) asignacion -> name_chain [ expresion . ] = expresion
+    (70) valor -> name_chain [ expresion . ]
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    ]               shift and go to state 100
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 78
+
+    (76) name_chain -> name_chain . NAME .
+
+    =               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    [               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    .               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    +               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    -               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    *               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    /               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    OPCOMPARE       reduce using rule 76 (name_chain -> name_chain . NAME .)
+    AND             reduce using rule 76 (name_chain -> name_chain . NAME .)
+    &               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    FINPARRAFO      reduce using rule 76 (name_chain -> name_chain . NAME .)
+    OR              reduce using rule 76 (name_chain -> name_chain . NAME .)
+    |               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    )               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    FUNCION         reduce using rule 76 (name_chain -> name_chain . NAME .)
+    SI              reduce using rule 76 (name_chain -> name_chain . NAME .)
+    MIENTRAS        reduce using rule 76 (name_chain -> name_chain . NAME .)
+    REGISTRO        reduce using rule 76 (name_chain -> name_chain . NAME .)
+    VECTOR          reduce using rule 76 (name_chain -> name_chain . NAME .)
+    NAME            reduce using rule 76 (name_chain -> name_chain . NAME .)
+    ENTERO          reduce using rule 76 (name_chain -> name_chain . NAME .)
+    REAL            reduce using rule 76 (name_chain -> name_chain . NAME .)
+    BOOLEANO        reduce using rule 76 (name_chain -> name_chain . NAME .)
+    CARACTER        reduce using rule 76 (name_chain -> name_chain . NAME .)
+    FINMIENTRAS     reduce using rule 76 (name_chain -> name_chain . NAME .)
+    ]               reduce using rule 76 (name_chain -> name_chain . NAME .)
+    ,               reduce using rule 76 (name_chain -> name_chain . NAME .)
+
+
+state 79
+
+    (71) valor -> name_chain . LONG .
+
+    +               reduce using rule 71 (valor -> name_chain . LONG .)
+    -               reduce using rule 71 (valor -> name_chain . LONG .)
+    *               reduce using rule 71 (valor -> name_chain . LONG .)
+    /               reduce using rule 71 (valor -> name_chain . LONG .)
+    OPCOMPARE       reduce using rule 71 (valor -> name_chain . LONG .)
+    AND             reduce using rule 71 (valor -> name_chain . LONG .)
+    &               reduce using rule 71 (valor -> name_chain . LONG .)
+    FINPARRAFO      reduce using rule 71 (valor -> name_chain . LONG .)
+    OR              reduce using rule 71 (valor -> name_chain . LONG .)
+    |               reduce using rule 71 (valor -> name_chain . LONG .)
+    )               reduce using rule 71 (valor -> name_chain . LONG .)
+    FUNCION         reduce using rule 71 (valor -> name_chain . LONG .)
+    SI              reduce using rule 71 (valor -> name_chain . LONG .)
+    MIENTRAS        reduce using rule 71 (valor -> name_chain . LONG .)
+    REGISTRO        reduce using rule 71 (valor -> name_chain . LONG .)
+    VECTOR          reduce using rule 71 (valor -> name_chain . LONG .)
+    NAME            reduce using rule 71 (valor -> name_chain . LONG .)
+    ENTERO          reduce using rule 71 (valor -> name_chain . LONG .)
+    REAL            reduce using rule 71 (valor -> name_chain . LONG .)
+    BOOLEANO        reduce using rule 71 (valor -> name_chain . LONG .)
+    CARACTER        reduce using rule 71 (valor -> name_chain . LONG .)
+    FINMIENTRAS     reduce using rule 71 (valor -> name_chain . LONG .)
+    ]               reduce using rule 71 (valor -> name_chain . LONG .)
+    ,               reduce using rule 71 (valor -> name_chain . LONG .)
+
+
+state 80
+
+    (35) def_funcion -> FUNCION NAME ( . lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (36) lista_args -> . tipo NAME , lista_args
+    (37) lista_args -> . tipo NAME
+    (38) lista_args -> .
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    )               reduce using rule 38 (lista_args -> .)
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    lista_args                     shift and go to state 102
+    tipo                           shift and go to state 103
+
+state 81
+
+    (55) factor -> NAME ( lista_expresiones . )
+
+    )               shift and go to state 104
+
+
+state 82
+
+    (57) lista_expresiones -> expresion . , lista_expresiones
+    (58) lista_expresiones -> expresion .
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    ,               shift and go to state 105
+    )               reduce using rule 58 (lista_expresiones -> expresion .)
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 83
+
+    (53) factor -> ( expresion ) .
+
+    +               reduce using rule 53 (factor -> ( expresion ) .)
+    -               reduce using rule 53 (factor -> ( expresion ) .)
+    *               reduce using rule 53 (factor -> ( expresion ) .)
+    /               reduce using rule 53 (factor -> ( expresion ) .)
+    OPCOMPARE       reduce using rule 53 (factor -> ( expresion ) .)
+    AND             reduce using rule 53 (factor -> ( expresion ) .)
+    &               reduce using rule 53 (factor -> ( expresion ) .)
+    FINPARRAFO      reduce using rule 53 (factor -> ( expresion ) .)
+    OR              reduce using rule 53 (factor -> ( expresion ) .)
+    |               reduce using rule 53 (factor -> ( expresion ) .)
+    )               reduce using rule 53 (factor -> ( expresion ) .)
+    FUNCION         reduce using rule 53 (factor -> ( expresion ) .)
+    SI              reduce using rule 53 (factor -> ( expresion ) .)
+    MIENTRAS        reduce using rule 53 (factor -> ( expresion ) .)
+    REGISTRO        reduce using rule 53 (factor -> ( expresion ) .)
+    VECTOR          reduce using rule 53 (factor -> ( expresion ) .)
+    NAME            reduce using rule 53 (factor -> ( expresion ) .)
+    ENTERO          reduce using rule 53 (factor -> ( expresion ) .)
+    REAL            reduce using rule 53 (factor -> ( expresion ) .)
+    BOOLEANO        reduce using rule 53 (factor -> ( expresion ) .)
+    CARACTER        reduce using rule 53 (factor -> ( expresion ) .)
+    FINMIENTRAS     reduce using rule 53 (factor -> ( expresion ) .)
+    ]               reduce using rule 53 (factor -> ( expresion ) .)
+    ,               reduce using rule 53 (factor -> ( expresion ) .)
+
+
+state 84
+
+    (70) valor -> name_chain [ . expresion ]
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    name_chain                     shift and go to state 53
+    expresion                      shift and go to state 106
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 85
+
+    (71) valor -> name_chain . . LONG
+    (76) name_chain -> name_chain . . NAME
+
+    LONG            shift and go to state 79
+    NAME            shift and go to state 78
+
+
+state 86
+
+    (14) declaracion -> tipo NAME = . expresion
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 107
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 87
+
+    (16) varios_name -> NAME , . varios_name
+    (16) varios_name -> . NAME , varios_name
+    (17) varios_name -> . NAME
+
+    NAME            shift and go to state 108
+
+    varios_name                    shift and go to state 109
+
+state 88
+
+    (72) condicional -> SI expresion FINPARRAFO . ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI expresion FINPARRAFO . ENTONCES FINPARRAFO statements1 FINSI
+
+    ENTONCES        shift and go to state 110
+
+
+state 89
+
+    (74) bucle -> MIENTRAS expresion statements1 . FINMIENTRAS
+
+    FINMIENTRAS     shift and go to state 111
+
+
+state 90
+
+    (4) statements1 -> statement . FINPARRAFO statements1
+
+    FINPARRAFO      shift and go to state 112
+
+
+state 91
+
+    (33) asignacion -> name_chain . = expresion
+    (34) asignacion -> name_chain . [ expresion ] = expresion
+    (76) name_chain -> name_chain . . NAME
+
+    =               shift and go to state 46
+    [               shift and go to state 113
+    .               shift and go to state 114
+
+
+state 92
+
+    (75) name_chain -> NAME .
+    (22) tipo -> NAME .
+
+    =               reduce using rule 75 (name_chain -> NAME .)
+    [               reduce using rule 75 (name_chain -> NAME .)
+    .               reduce using rule 75 (name_chain -> NAME .)
+    NAME            reduce using rule 22 (tipo -> NAME .)
+
+
+state 93
+
+    (23) declaracion_reg -> REGISTRO NAME { . blq_registro }
+    (24) blq_registro -> . tipo varios_name ; FINPARRAFO blq_registro
+    (25) blq_registro -> . tipo varios_name ;
+    (26) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ;
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    VECTOR          shift and go to state 117
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    blq_registro                   shift and go to state 115
+    tipo                           shift and go to state 116
+
+state 94
+
+    (32) declaracion_vec -> VECTOR tipo_vector NAME . [ NUMINTEGER ]
+
+    [               shift and go to state 118
+
+
+state 95
+
+    (45) expresion_comp -> expresion_comp OPCOMPARE expresion_add .
+
+    OPCOMPARE       reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    AND             reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    &               reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    FINPARRAFO      reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    OR              reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    |               reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    )               reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    FUNCION         reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    SI              reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    MIENTRAS        reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    REGISTRO        reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    VECTOR          reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    NAME            reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    ENTERO          reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    REAL            reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    BOOLEANO        reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    CARACTER        reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    FINMIENTRAS     reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    ]               reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+    ,               reduce using rule 45 (expresion_comp -> expresion_comp OPCOMPARE expresion_add .)
+
+
+state 96
+
+    (47) expresion_add -> expresion_mult + expresion_add .
+
+    OPCOMPARE       reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    AND             reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    &               reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    FINPARRAFO      reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    OR              reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    |               reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    )               reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    FUNCION         reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    SI              reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    MIENTRAS        reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    REGISTRO        reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    VECTOR          reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    NAME            reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    ENTERO          reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    REAL            reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    BOOLEANO        reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    CARACTER        reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    FINMIENTRAS     reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    ]               reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+    ,               reduce using rule 47 (expresion_add -> expresion_mult + expresion_add .)
+
+
+state 97
+
+    (48) expresion_add -> expresion_mult - expresion_add .
+
+    OPCOMPARE       reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    AND             reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    &               reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    FINPARRAFO      reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    OR              reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    |               reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    )               reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    FUNCION         reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    SI              reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    MIENTRAS        reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    REGISTRO        reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    VECTOR          reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    NAME            reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    ENTERO          reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    REAL            reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    BOOLEANO        reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    CARACTER        reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    FINMIENTRAS     reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    ]               reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+    ,               reduce using rule 48 (expresion_add -> expresion_mult - expresion_add .)
+
+
+state 98
+
+    (50) expresion_mult -> expresion_mult * factor .
+
+    +               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    -               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    *               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    /               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    OPCOMPARE       reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    AND             reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    &               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    FINPARRAFO      reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    OR              reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    |               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    )               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    FUNCION         reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    SI              reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    MIENTRAS        reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    REGISTRO        reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    VECTOR          reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    NAME            reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    ENTERO          reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    REAL            reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    BOOLEANO        reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    CARACTER        reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    FINMIENTRAS     reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    ]               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+    ,               reduce using rule 50 (expresion_mult -> expresion_mult * factor .)
+
+
+state 99
+
+    (51) expresion_mult -> expresion_mult / factor .
+
+    +               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    -               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    *               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    /               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    OPCOMPARE       reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    AND             reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    &               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    FINPARRAFO      reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    OR              reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    |               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    )               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    FUNCION         reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    SI              reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    MIENTRAS        reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    REGISTRO        reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    VECTOR          reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    NAME            reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    ENTERO          reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    REAL            reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    BOOLEANO        reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    CARACTER        reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    FINMIENTRAS     reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    ]               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+    ,               reduce using rule 51 (expresion_mult -> expresion_mult / factor .)
+
+
+state 100
+
+    (34) asignacion -> name_chain [ expresion ] . = expresion
+    (70) valor -> name_chain [ expresion ] .
+
+    =               shift and go to state 119
+    +               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    -               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    *               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    /               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    OPCOMPARE       reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    AND             reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    &               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    FINPARRAFO      reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    OR              reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    |               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+
+
+state 101
+
+    (22) tipo -> NAME .
+
+    NAME            reduce using rule 22 (tipo -> NAME .)
+    FINPARRAFO      reduce using rule 22 (tipo -> NAME .)
+
+
+state 102
+
+    (35) def_funcion -> FUNCION NAME ( lista_args . ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    )               shift and go to state 120
+
+
+state 103
+
+    (36) lista_args -> tipo . NAME , lista_args
+    (37) lista_args -> tipo . NAME
+
+    NAME            shift and go to state 121
+
+
+state 104
+
+    (55) factor -> NAME ( lista_expresiones ) .
+
+    +               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    -               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    *               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    /               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    OPCOMPARE       reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    AND             reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    &               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    FINPARRAFO      reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    OR              reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    |               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    )               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    FUNCION         reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    SI              reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    MIENTRAS        reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    REGISTRO        reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    VECTOR          reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    NAME            reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    ENTERO          reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    REAL            reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    BOOLEANO        reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    CARACTER        reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    FINMIENTRAS     reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    ]               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+    ,               reduce using rule 55 (factor -> NAME ( lista_expresiones ) .)
+
+
+state 105
+
+    (57) lista_expresiones -> expresion , . lista_expresiones
+    (57) lista_expresiones -> . expresion , lista_expresiones
+    (58) lista_expresiones -> . expresion
+    (59) lista_expresiones -> .
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    )               reduce using rule 59 (lista_expresiones -> .)
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 82
+    lista_expresiones              shift and go to state 122
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 106
+
+    (70) valor -> name_chain [ expresion . ]
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    ]               shift and go to state 123
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 107
+
+    (14) declaracion -> tipo NAME = expresion .
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      reduce using rule 14 (declaracion -> tipo NAME = expresion .)
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 108
+
+    (16) varios_name -> NAME . , varios_name
+    (17) varios_name -> NAME .
+
+    ,               shift and go to state 87
+    FINPARRAFO      reduce using rule 17 (varios_name -> NAME .)
+    ;               reduce using rule 17 (varios_name -> NAME .)
+
+
+state 109
+
+    (16) varios_name -> NAME , varios_name .
+
+    FINPARRAFO      reduce using rule 16 (varios_name -> NAME , varios_name .)
+    ;               reduce using rule 16 (varios_name -> NAME , varios_name .)
+
+
+state 110
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES . FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI expresion FINPARRAFO ENTONCES . FINPARRAFO statements1 FINSI
+
+    FINPARRAFO      shift and go to state 124
+
+
+state 111
+
+    (74) bucle -> MIENTRAS expresion statements1 FINMIENTRAS .
+
+    FINPARRAFO      reduce using rule 74 (bucle -> MIENTRAS expresion statements1 FINMIENTRAS .)
+
+
+state 112
+
+    (4) statements1 -> statement FINPARRAFO . statements1
+    (4) statements1 -> . statement FINPARRAFO statements1
+    (5) statements1 -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    FINMIENTRAS     reduce using rule 5 (statements1 -> .)
+    SINO            reduce using rule 5 (statements1 -> .)
+    FINSI           reduce using rule 5 (statements1 -> .)
+    DEVOLVER        reduce using rule 5 (statements1 -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 92
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+
+    statement                      shift and go to state 90
+    statements1                    shift and go to state 125
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    name_chain                     shift and go to state 91
+    tipo                           shift and go to state 16
+
+state 113
+
+    (34) asignacion -> name_chain [ . expresion ] = expresion
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    name_chain                     shift and go to state 53
+    expresion                      shift and go to state 126
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 114
+
+    (76) name_chain -> name_chain . . NAME
+
+    NAME            shift and go to state 78
+
+
+state 115
+
+    (23) declaracion_reg -> REGISTRO NAME { blq_registro . }
+
+    }               shift and go to state 127
+
+
+state 116
+
+    (24) blq_registro -> tipo . varios_name ; FINPARRAFO blq_registro
+    (25) blq_registro -> tipo . varios_name ;
+    (16) varios_name -> . NAME , varios_name
+    (17) varios_name -> . NAME
+
+    NAME            shift and go to state 108
+
+    varios_name                    shift and go to state 128
+
+state 117
+
+    (26) blq_registro -> VECTOR . tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR . tipo_vector NAME [ NUMINTEGER ] ;
+    (28) tipo_vector -> . ENTERO
+    (29) tipo_vector -> . REAL
+    (30) tipo_vector -> . BOOLEANO
+    (31) tipo_vector -> . CARACTER
+
+    ENTERO          shift and go to state 60
+    REAL            shift and go to state 61
+    BOOLEANO        shift and go to state 62
+    CARACTER        shift and go to state 63
+
+    tipo_vector                    shift and go to state 129
+
+state 118
+
+    (32) declaracion_vec -> VECTOR tipo_vector NAME [ . NUMINTEGER ]
+
+    NUMINTEGER      shift and go to state 130
+
+
+state 119
+
+    (34) asignacion -> name_chain [ expresion ] = . expresion
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    name_chain                     shift and go to state 53
+    expresion                      shift and go to state 131
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+
+state 120
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) . : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    :               shift and go to state 132
+
+
+state 121
+
+    (36) lista_args -> tipo NAME . , lista_args
+    (37) lista_args -> tipo NAME .
+
+    ,               shift and go to state 133
+    )               reduce using rule 37 (lista_args -> tipo NAME .)
+
+
+state 122
+
+    (57) lista_expresiones -> expresion , lista_expresiones .
+
+    )               reduce using rule 57 (lista_expresiones -> expresion , lista_expresiones .)
+
+
+state 123
+
+    (70) valor -> name_chain [ expresion ] .
+
+    +               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    -               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    *               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    /               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    OPCOMPARE       reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    AND             reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    &               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    )               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    OR              reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    |               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    FINPARRAFO      reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    FUNCION         reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    SI              reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    MIENTRAS        reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    REGISTRO        reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    VECTOR          reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    NAME            reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    ENTERO          reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    REAL            reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    BOOLEANO        reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    CARACTER        reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    FINMIENTRAS     reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    ]               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+    ,               reduce using rule 70 (valor -> name_chain [ expresion ] .)
+
+
+state 124
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO . statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO . statements1 FINSI
+    (4) statements1 -> . statement FINPARRAFO statements1
+    (5) statements1 -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    SINO            reduce using rule 5 (statements1 -> .)
+    FINSI           reduce using rule 5 (statements1 -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 92
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+
+    statements1                    shift and go to state 134
+    statement                      shift and go to state 90
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    name_chain                     shift and go to state 91
+    tipo                           shift and go to state 16
+
+state 125
+
+    (4) statements1 -> statement FINPARRAFO statements1 .
+
+    FINMIENTRAS     reduce using rule 4 (statements1 -> statement FINPARRAFO statements1 .)
+    SINO            reduce using rule 4 (statements1 -> statement FINPARRAFO statements1 .)
+    FINSI           reduce using rule 4 (statements1 -> statement FINPARRAFO statements1 .)
+    DEVOLVER        reduce using rule 4 (statements1 -> statement FINPARRAFO statements1 .)
+
+
+state 126
+
+    (34) asignacion -> name_chain [ expresion . ] = expresion
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    ]               shift and go to state 135
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 127
+
+    (23) declaracion_reg -> REGISTRO NAME { blq_registro } .
+
+    FINPARRAFO      reduce using rule 23 (declaracion_reg -> REGISTRO NAME { blq_registro } .)
+
+
+state 128
+
+    (24) blq_registro -> tipo varios_name . ; FINPARRAFO blq_registro
+    (25) blq_registro -> tipo varios_name . ;
+
+    ;               shift and go to state 136
+
+
+state 129
+
+    (26) blq_registro -> VECTOR tipo_vector . NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector . NAME [ NUMINTEGER ] ;
+
+    NAME            shift and go to state 137
+
+
+state 130
+
+    (32) declaracion_vec -> VECTOR tipo_vector NAME [ NUMINTEGER . ]
+
+    ]               shift and go to state 138
+
+
+state 131
+
+    (34) asignacion -> name_chain [ expresion ] = expresion .
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      reduce using rule 34 (asignacion -> name_chain [ expresion ] = expresion .)
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 132
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : . tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    tipo                           shift and go to state 139
+
+state 133
+
+    (36) lista_args -> tipo NAME , . lista_args
+    (36) lista_args -> . tipo NAME , lista_args
+    (37) lista_args -> . tipo NAME
+    (38) lista_args -> .
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    )               reduce using rule 38 (lista_args -> .)
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    tipo                           shift and go to state 103
+    lista_args                     shift and go to state 140
+
+state 134
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 . SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 . FINSI
+
+    SINO            shift and go to state 141
+    FINSI           shift and go to state 142
+
+
+state 135
+
+    (34) asignacion -> name_chain [ expresion ] . = expresion
+
+    =               shift and go to state 119
+
+
+state 136
+
+    (24) blq_registro -> tipo varios_name ; . FINPARRAFO blq_registro
+    (25) blq_registro -> tipo varios_name ; .
+
+    FINPARRAFO      shift and go to state 143
+    }               reduce using rule 25 (blq_registro -> tipo varios_name ; .)
+
+
+state 137
+
+    (26) blq_registro -> VECTOR tipo_vector NAME . [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector NAME . [ NUMINTEGER ] ;
+
+    [               shift and go to state 144
+
+
+state 138
+
+    (32) declaracion_vec -> VECTOR tipo_vector NAME [ NUMINTEGER ] .
+
+    FINPARRAFO      reduce using rule 32 (declaracion_vec -> VECTOR tipo_vector NAME [ NUMINTEGER ] .)
+
+
+state 139
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo . FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    FINPARRAFO      shift and go to state 145
+
+
+state 140
+
+    (36) lista_args -> tipo NAME , lista_args .
+
+    )               reduce using rule 36 (lista_args -> tipo NAME , lista_args .)
+
+
+state 141
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO . FINPARRAFO statements1 FINSI
+
+    FINPARRAFO      shift and go to state 146
+
+
+state 142
+
+    (73) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI .
+
+    FINPARRAFO      reduce using rule 73 (condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI .)
+
+
+state 143
+
+    (24) blq_registro -> tipo varios_name ; FINPARRAFO . blq_registro
+    (24) blq_registro -> . tipo varios_name ; FINPARRAFO blq_registro
+    (25) blq_registro -> . tipo varios_name ;
+    (26) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ;
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    VECTOR          shift and go to state 117
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    tipo                           shift and go to state 116
+    blq_registro                   shift and go to state 147
+
+state 144
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ . NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector NAME [ . NUMINTEGER ] ;
+
+    NUMINTEGER      shift and go to state 148
+
+
+state 145
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO . { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    {               shift and go to state 149
+
+
+state 146
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO . statements1 FINSI
+    (4) statements1 -> . statement FINPARRAFO statements1
+    (5) statements1 -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    FINSI           reduce using rule 5 (statements1 -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 92
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+
+    statements1                    shift and go to state 150
+    statement                      shift and go to state 90
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    name_chain                     shift and go to state 91
+    tipo                           shift and go to state 16
+
+state 147
+
+    (24) blq_registro -> tipo varios_name ; FINPARRAFO blq_registro .
+
+    }               reduce using rule 24 (blq_registro -> tipo varios_name ; FINPARRAFO blq_registro .)
+
+
+state 148
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER . ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER . ] ;
+
+    ]               shift and go to state 151
+
+
+state 149
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { . FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+
+    FINPARRAFO      shift and go to state 152
+
+
+state 150
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 . FINSI
+
+    FINSI           shift and go to state 153
+
+
+state 151
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] . ; FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] . ;
+
+    ;               shift and go to state 154
+
+
+state 152
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO . statements1 DEVOLVER expresion FINPARRAFO }
+    (4) statements1 -> . statement FINPARRAFO statements1
+    (5) statements1 -> .
+    (6) statement -> . asignacion
+    (7) statement -> . def_funcion
+    (8) statement -> . condicional
+    (9) statement -> . bucle
+    (10) statement -> . declaracion
+    (11) statement -> . declaracion_reg
+    (12) statement -> . declaracion_vec
+    (13) statement -> .
+    (33) asignacion -> . name_chain = expresion
+    (34) asignacion -> . name_chain [ expresion ] = expresion
+    (35) def_funcion -> . FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO }
+    (72) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI
+    (73) condicional -> . SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 FINSI
+    (74) bucle -> . MIENTRAS expresion statements1 FINMIENTRAS
+    (14) declaracion -> . tipo NAME = expresion
+    (15) declaracion -> . tipo varios_name
+    (23) declaracion_reg -> . REGISTRO NAME { blq_registro }
+    (32) declaracion_vec -> . VECTOR tipo_vector NAME [ NUMINTEGER ]
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    DEVOLVER        reduce using rule 5 (statements1 -> .)
+    FINPARRAFO      reduce using rule 13 (statement -> .)
+    FUNCION         shift and go to state 13
+    SI              shift and go to state 17
+    MIENTRAS        shift and go to state 18
+    REGISTRO        shift and go to state 19
+    VECTOR          shift and go to state 20
+    NAME            shift and go to state 92
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+
+    tipo                           shift and go to state 16
+    statements1                    shift and go to state 155
+    statement                      shift and go to state 90
+    asignacion                     shift and go to state 4
+    def_funcion                    shift and go to state 5
+    condicional                    shift and go to state 6
+    bucle                          shift and go to state 7
+    declaracion                    shift and go to state 8
+    declaracion_reg                shift and go to state 9
+    declaracion_vec                shift and go to state 10
+    name_chain                     shift and go to state 91
+
+state 153
+
+    (72) condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI .
+
+    FINPARRAFO      reduce using rule 72 (condicional -> SI expresion FINPARRAFO ENTONCES FINPARRAFO statements1 SINO FINPARRAFO statements1 FINSI .)
+
+
+state 154
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; . FINPARRAFO blq_registro
+    (27) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; .
+
+    FINPARRAFO      shift and go to state 156
+    }               reduce using rule 27 (blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; .)
+
+
+state 155
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 . DEVOLVER expresion FINPARRAFO }
+
+    DEVOLVER        shift and go to state 157
+
+
+state 156
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO . blq_registro
+    (24) blq_registro -> . tipo varios_name ; FINPARRAFO blq_registro
+    (25) blq_registro -> . tipo varios_name ;
+    (26) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro
+    (27) blq_registro -> . VECTOR tipo_vector NAME [ NUMINTEGER ] ;
+    (18) tipo -> . ENTERO
+    (19) tipo -> . REAL
+    (20) tipo -> . BOOLEANO
+    (21) tipo -> . CARACTER
+    (22) tipo -> . NAME
+
+    VECTOR          shift and go to state 117
+    ENTERO          shift and go to state 23
+    REAL            shift and go to state 24
+    BOOLEANO        shift and go to state 25
+    CARACTER        shift and go to state 26
+    NAME            shift and go to state 101
+
+    blq_registro                   shift and go to state 158
+    tipo                           shift and go to state 116
+
+state 157
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER . expresion FINPARRAFO }
+    (39) expresion -> . expresion OR expresion_and
+    (40) expresion -> . expresion | expresion_and
+    (41) expresion -> . expresion_and
+    (42) expresion_and -> . expresion_and AND expresion_comp
+    (43) expresion_and -> . expresion_and & expresion_comp
+    (44) expresion_and -> . expresion_comp
+    (45) expresion_comp -> . expresion_comp OPCOMPARE expresion_add
+    (46) expresion_comp -> . expresion_add
+    (47) expresion_add -> . expresion_mult + expresion_add
+    (48) expresion_add -> . expresion_mult - expresion_add
+    (49) expresion_add -> . expresion_mult
+    (50) expresion_mult -> . expresion_mult * factor
+    (51) expresion_mult -> . expresion_mult / factor
+    (52) expresion_mult -> . factor
+    (53) factor -> . ( expresion )
+    (54) factor -> . valor
+    (55) factor -> . NAME ( lista_expresiones )
+    (56) factor -> . operador_unario factor
+    (64) valor -> . NUMREAL
+    (65) valor -> . NUMINTEGER
+    (66) valor -> . CIERTO
+    (67) valor -> . FALSO
+    (68) valor -> . CARACTERC
+    (69) valor -> . name_chain
+    (70) valor -> . name_chain [ expresion ]
+    (71) valor -> . name_chain . LONG
+    (60) operador_unario -> . -
+    (61) operador_unario -> . NOT
+    (62) operador_unario -> . !
+    (63) operador_unario -> . +
+    (75) name_chain -> . NAME
+    (76) name_chain -> . name_chain . NAME
+
+    (               shift and go to state 15
+    NAME            shift and go to state 52
+    NUMREAL         shift and go to state 34
+    NUMINTEGER      shift and go to state 21
+    CIERTO          shift and go to state 35
+    FALSO           shift and go to state 36
+    CARACTERC       shift and go to state 37
+    -               shift and go to state 30
+    NOT             shift and go to state 38
+    !               shift and go to state 39
+    +               shift and go to state 29
+
+    expresion                      shift and go to state 159
+    expresion_and                  shift and go to state 11
+    expresion_comp                 shift and go to state 22
+    expresion_add                  shift and go to state 27
+    expresion_mult                 shift and go to state 28
+    factor                         shift and go to state 31
+    valor                          shift and go to state 32
+    operador_unario                shift and go to state 33
+    name_chain                     shift and go to state 53
+
+state 158
+
+    (26) blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro .
+
+    }               reduce using rule 26 (blq_registro -> VECTOR tipo_vector NAME [ NUMINTEGER ] ; FINPARRAFO blq_registro .)
+
+
+state 159
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion . FINPARRAFO }
+    (39) expresion -> expresion . OR expresion_and
+    (40) expresion -> expresion . | expresion_and
+
+    FINPARRAFO      shift and go to state 160
+    OR              shift and go to state 42
+    |               shift and go to state 43
+
+
+state 160
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO . }
+
+    }               shift and go to state 161
+
+
+state 161
+
+    (35) def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO } .
+
+    FINPARRAFO      reduce using rule 35 (def_funcion -> FUNCION NAME ( lista_args ) : tipo FINPARRAFO { FINPARRAFO statements1 DEVOLVER expresion FINPARRAFO } .)
+

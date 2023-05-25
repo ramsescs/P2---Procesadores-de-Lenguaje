@@ -1,0 +1,16 @@
+% Prueba 1: Asignaciones y operaciones de enteros simples
+
+% Declaraciones
+ENTERO re1, re2
+
+% Operaciones
+re1=5 * +3 - 80/10 % esta expresión debe resultar 7
+re2=10 / 5 * re1 % esta expresión debe resultar 14
+
+SI re2==3
+ENTONCES
+ re2 = re2-3
+SINO %% cuerpo cuando la condición es falsa
+ re2 = 10-re1*re1
+FINSI %% fin de la sentencia
+

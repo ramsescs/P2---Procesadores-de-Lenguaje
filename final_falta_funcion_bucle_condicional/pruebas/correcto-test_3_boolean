@@ -1,0 +1,11 @@
+% Prueba 3: Asignaciones y operaciones de boolean
+
+% Declaraciones
+BOOLEANO re1, re2, re3
+
+% Operaciones
+re1=5/2 > 3/2 % esta expresión debe resultar true
+re2= !(5 <= 8) % esta expresión debe resultar false
+
+re3 = re2 AND re1 % resultado: false
+re3 = re2 OR re1 % resultado: true

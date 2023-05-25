@@ -1,0 +1,11 @@
+REGISTRO CIRCULO {REAL cx, cy, radio; % definición de tipo
+                  CARACTER color;} % definición de tipo
+                                    % compuesto
+CIRCULO circ1 % declaración variable registro (no permite asignación al mismo tiempo que la declaracion)
+
+%%% Expresiones
+circ1.cx = 7.0 % campo de variable registro
+circ1.cy = circ1.cx * 2 % acceso a campo de variable registro y asignacion
+circ1.radio = 10.0 % campo de variable registro
+circ1.color = 'r' % campo de variable registro
+

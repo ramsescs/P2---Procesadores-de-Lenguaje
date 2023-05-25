@@ -1,0 +1,35 @@
+REGISTRO VECTOR2D {REAL x1, x2;}
+REGISTRO BOLA {VECTOR2D centro;
+                    REAL radio;} %definición tipo compuesto
+BOLA punto1 % declaración variable struct (no permite asignación al
+VECTOR CARACTER cadena[10]
+% mismo tiempo que la declaracion
+REGISTRO PALABRA {VECTOR CARACTER cadena[10];}
+REGISTRO PERSONA {PALABRA nombre, apellido1, apellido2;
+ENTERO edad;}
+PERSONA alumno
+%%% Expresiones
+punto1.centro.x1 = 0.0 % campo de variable resgistro anidada
+punto1.centro.x2 = 0.0 % campo de variable resgistro anidada
+punto1.radio = 10.0 % campo de variable resgistro
+alumno.nombre.cadena[0]='A'
+alumno.nombre.cadena[1]='l'
+alumno.nombre.cadena[2]='b'
+alumno.nombre.cadena[3]='e'
+alumno.nombre.cadena[4]='r'
+alumno.nombre.cadena[5]='t'
+alumno.nombre.cadena[6]='o'
+alumno.nombre.cadena[7]='0'
+alumno.apellido1.cadena[0]='G'
+alumno.apellido1.cadena[1]='a'
+alumno.apellido1.cadena[2]='r'
+alumno.apellido1.cadena[3]='c'
+alumno.apellido1.cadena[4]='í'
+alumno.apellido1.cadena[5]='a'
+alumno.apellido1.cadena[6]='0'
+alumno.apellido2.cadena[0]='S'
+alumno.apellido2.cadena[1]='a'
+alumno.apellido2.cadena[2]='n'
+alumno.apellido2.cadena[3]='z'
+alumno.apellido2.cadena[4]='0'
+

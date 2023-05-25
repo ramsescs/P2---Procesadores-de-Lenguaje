@@ -1,0 +1,8 @@
+% Prueba 2: Asignaciones y operaciones de reales simples
+
+% Declaraciones
+REAL re1, re2
+
+% Operaciones
+re1=5/2 * 3/2 % esta expresión debe resultar 3.75
+re2=1.5 * re1 % esta expresión debe resultar 5.625

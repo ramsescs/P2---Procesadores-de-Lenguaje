@@ -1,0 +1,4 @@
+FUNCION cuadrado(REAL a, ENTERO b): REAL
+{
+    DEVOLVER a + b
+}

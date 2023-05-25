@@ -44,9 +44,9 @@ REAL num
 BOOLEANO espos
 SI num >= 0
 ENTONCES
-Espositivo = CIERTO
+espos = CIERTO
 SINO
-Espositivo = FALSO
+espos = FALSO
 FINSI
 %cálculo del máximo
 REAL a,b,c,max
