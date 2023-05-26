@@ -1,1 +1,4 @@
-print(10*2)
+d = {'a': 1, 'b':2}
+
+for i in d:
+    print(d[i])

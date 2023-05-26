@@ -1,6 +1,7 @@
 FUNCION cuadrado(REAL a, ENTERO b): REAL
 {
-    DEVOLVER 1.5
+    DEVOLVER a + b
 }
 
-cuadrado(1.25*2, 5+2)
+cuadrado(4, 1+2)
+

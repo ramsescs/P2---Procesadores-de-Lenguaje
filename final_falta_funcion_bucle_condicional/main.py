@@ -6,7 +6,7 @@ from MySyntax import MySyntax
 import ply.yacc as yacc
 import json
 
-fname="./pruebas/correcto-test_1_entero"
+fname="./pruebas/correcto-test_7_funcion"
 f= open(fname, 'r')
 s = f.read()
 p = MySyntax(s)

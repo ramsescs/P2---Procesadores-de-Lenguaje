@@ -263,32 +263,44 @@ class MySyntax(object):
         args = self.createArgsDict(p[4])
 
         if not self.existsFunc(p[2], args):
-            # Agregar dict de funcion a la lista
-            self.funciones.append({'nombre': p[2], 'tipo': p[7], 'lista_args': args})
+            
+            # Guardar lista de args en lista de variables
+            for arg in args:
+                # Comprobar que son tipos basicos
+                if args[arg].upper() in ['ENTERO', 'REAL', 'BOOLEANO', 'CARACTER']:
+                    valor = 0 if args[arg].upper() == 'ENTERO' else 0.0 if args[arg].upper() == 'REAL' else False if args[arg].upper() == 'BOOLEANO' \
+                    else ''
 
-            print('============= FUNCION ', self.funciones[-1])
+                    # Guardar variable en scope global/tabla de simbolos general
+                    self.check_and_assign_variable(args[arg].upper(), arg, valor)
+                    
+                else: 
+                    print('ERROR: Funcion - Tipo incorrecto en lista de argumentos (solo se aceptan tipos basicos)')
+                    return
+
+                # Comprobacion que tipo de funcion y tipo devuelto coinciden
+            if p[7].upper() == 'ENTERO' and type(p[13]) == int or \
+                p[7].upper() == 'REAL' and type(p[13]) == float or \
+                p[7].upper() == 'BOOLEANO' and type(p[13]) == bool or \
+                p[7].upper() == 'CARACTER' and type(p[13]) == str:
+                    # Agregar dict de funcion a la lista
+                    self.funciones.append({'nombre': p[2], 'tipo': p[7], 'lista_args': args})
+                    print('DECLARACION FUNCION EN TR: ', self.funciones[-1])
+            else:
+                print(f'ERROR: Tipo de funcion {p[2]} no coincide con tipo devuelto: {p[7]} y {type(p[13])}')
 
         else:
             print("ERROR6: Funcion ", p[2], " ya declarada con los mismos argumentos")
+            return
 
 
         '''
         Estructura diccionario:
-        Revisar que tipo devuelto == tipo de funcion
-        **Revisar que tipos en la llamada == tipo de parametros definidos
+        
 
-
-            if p[7].upper() == 'ENTERO' and type(p[13]) == int or p[7].upper() == 'REAL' and type(p[13]) == float \
-                            or p[7].upper() == 'BOOLEANO' and type(p[13]) == bool or \
-                            p[7].upper() == 'CARACTER' and type(p[13]) == str:
-                
-                # Agregar dict de funcion a la lista
-                self.funciones.append({'nombre': p[2], 'tipo': p[7], 'lista_args': args})
-
-                print('============= FUNCION ', self.funciones[p[2]])
-
-            else:
-                print("ERROR: Funcion - Tipo devuelto erroneo")
+        Consideraciones:
+                    - Variables en lista_args guardadas en scope global
+                    - lista_args solo acepta tipos basicos
 
         '''
 
@@ -405,22 +417,32 @@ class MySyntax(object):
         elif len(p) == 5:
             # para el caso de name_chain '(' lista_expresiones ')', es cuando se usa una función ver como guardar las acciones de funcion y como usarlos
             #también como comprobar los tipos
-            pass
+            if not self.existFuncName(p[1]):
+                print(f'ERROR: Llamada Funcion "{p[1]}" - No existe funcion con ese nombre')
+            if not self.checkFuncArgs(p[1],p[3]):
+                print(f'ERROR: Llamada Funcion "{p[1]}" - Lista de Argumentos Incorrecta')
+             
+            # No se ejecutara el codigo de la funcion por lo que devolvemos 1
+            p[0] = 1
 
         print("p_factor", p[0])
-        # Agrega la acción semántica aquí
+
     def p_lista_expresiones(self, p):
         '''lista_expresiones : expresion ',' lista_expresiones
                              | expresion
                              |'''
         # Esto es para parar una lista de expresiones a una función
+        if type(p[0]) != list:
+            p[0] = []
+
         if len(p) == 2:
-            p[0] = p[1]
+            p[0].append(p[1])
         elif len(p) == 4:
             if p[3]:
-                p[0] = p[1] + ',' + p[3]
+                p[0].append(p[1]) 
+                p[0] = p[0] + p[3]
             else:
-                p[0] = p[1]
+                p[0].append(p[1])
 
 
         print("p_lista_expresiones", p[0])
@@ -592,7 +614,7 @@ class MySyntax(object):
                 if len(args.keys()) == len(func['lista_args'].keys()):
                     # Comprobar si los tipos son iguales
                     same_types = True
-                    arg_names = func['lista_args'].keys()
+                    arg_names = list(func['lista_args'].keys())
                     for i in range(len(args.keys())):
                         if args[args.keys()[i]].upper() != func['lista_args'][arg_names[i]].upper():
                             same_types = False
@@ -611,4 +633,42 @@ class MySyntax(object):
             dict[arg_name] = arg_type
 
         return dict
+    
+    def existFuncName(self, fName):
+        for func in self.funciones:
+            if(func['nombre'] == fName):
+                return True
+        return False
+    
+    def checkFuncArgs(self, fName, args):
+        
+        # Si algun argumento no es de tipo basico devolver error
+        for arg in args:
+            if type(arg) not in (int, float, bool, str):
+                return False
+            
+        for func in self.funciones:
+            if(func['nombre'] == fName):
+                # Comprobar si coinciden numero de args
+                if len(args) == len(func['lista_args'].keys()):
+                    for arg in args:
+                        # Comprobar si los tipos son iguales
+                        same_types = True
+                        arg_names = list(func['lista_args'].keys())
+
+                        for i in range(len(args)):
+
+                            func_arg_type = func['lista_args'][arg_names[i]].upper()
+                            if (type(arg) == int  and func_arg_type != 'ENTERO') or \
+                                (type(arg) == float and func_arg_type != 'REAL') or \
+                                (type(arg) == bool and func_arg_type != 'BOOLEANO') or \
+                                (type(arg) == str and func_arg_type != 'CARACTER'):
+                                    print(f'TIPO NO COINCIDEN: {type(arg)} y {func_arg_type}')
+                                    print(arg_names[i])
+                                    print(args, func['lista_args'])
+                                    same_types = False
+
+                    # Funcion encontrada con nombre y tipos iguales
+                    if same_types: return True
+        return False
 
