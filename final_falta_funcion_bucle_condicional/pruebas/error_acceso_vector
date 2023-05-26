@@ -1,0 +1,6 @@
+
+VECTOR REAL lista[10]
+
+%%% Expresiones
+lista[cierto and falso] = 3
+lista[1.4] = 5

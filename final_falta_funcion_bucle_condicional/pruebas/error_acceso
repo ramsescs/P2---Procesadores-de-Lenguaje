@@ -1,0 +1,18 @@
+
+VECTOR REAL lista[10] 
+
+%%% Expresiones
+lista[0] = 3
+lista[1] = 5
+
+lista[2] = lista[0] * lista[1]
+
+lista[3] = lista[12] *2
+
+
+REGISTRO CIRCULO {REAL cx, cy, radio; % definición de tipo
+                  CARACTER color;} % definición de tipo
+                                    % compuesto
+CIRCULO circ1 % declaración variable registro (no permite asignación al mismo tiempo que la declaracion)
+
+circ1.tam = 3
